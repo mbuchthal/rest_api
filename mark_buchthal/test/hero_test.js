@@ -13,6 +13,7 @@ process.env.MONGO_URI = 'mongodb://localhost/heroes_test_db';
 require(__dirname + '/../server');
 
 describe('POST method', () => {
+
   after((done) => {
     mongoose.connection.db.dropDatabase(() => {
       done();

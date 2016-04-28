@@ -21,8 +21,10 @@
     "mocha": "^2.4.5"
   },
   "dependencies": {
+    "bcrypt": "^0.8.6",
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
+    "jsonwebtoken": "^6.1.0",
     "mongoose": "^4.4.12"
   }
 }
