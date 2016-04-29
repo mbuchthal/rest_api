@@ -10,11 +10,11 @@ var userSchema = new mongoose.Schema({
   findHash: { type: String, unique: true }
 });
 
-userSchema.methods.generateHash = (password) => {
+userSchema.methods.generateHash = function(password) {
   return this.password = bcrypt.hashSync(password, 8);
 };
 
-userSchema.methods.compareHash = (password) => {
+userSchema.methods.compareHash = function(password) {
   return bcrypt.compareSync(password, this.password);
 };
 
@@ -24,7 +24,7 @@ userSchema.methods.generateFindHash = function(cb) {
   var _generateFindHash = () => {
     var hash = crypto.randomBytes(32);
     this.findHash = hash.toString('hex');
-    this.save((err, data) => {
+    this.save((err) => {
       if (err) {
         if (tries > 9) {
           return cb(new Error('could not generate hash'));

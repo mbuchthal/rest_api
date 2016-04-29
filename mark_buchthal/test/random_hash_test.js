@@ -4,6 +4,7 @@ const User = require(__dirname + '/../models/user');
 const mongoose = require('mongoose');
 
 describe('find hash', () => {
+
   before((done) => {
     mongoose.connect('mongodb://localhost/rand_user_hash_test');
     var newUser = new User({ username: 'test', password: 'test' });
@@ -15,10 +16,14 @@ describe('find hash', () => {
   });
 
   after((done) => {
-    mongoose.connection.db.dropDatabase(done);
+    mongoose.connection.db.dropDatabase(() => {
+      mongoose.disconnect(() => {
+        done();
+      });
+    });
   });
 
-  it('should be able to create a random hash', () => {
+  it('should be able to create a random hash', (done) => {
     this.user.generateFindHash((err, hash) => {
       expect(err).to.eql(null);
       expect(hash.length).to.not.eql(0);

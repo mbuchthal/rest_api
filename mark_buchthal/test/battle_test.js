@@ -6,17 +6,19 @@ const request = chai.request;
 const mongoose = require('mongoose');
 const Hero = require(__dirname + '/../models/hero');
 const Villain = require(__dirname + '/../models/villain');
-
+const server = require(__dirname + '/../_server');
 var port = process.env.PORT = 1234;
-process.env.MONGO_URI = 'mongodb://localhost/heroes_test_db';
-
-require(__dirname + '/../server');
 
 describe('the battle router', () => {
+  before((done) => {
+    server.listen(port, 'mongodb://localhost/heroes_test_db', done)
+  });
 
   after((done) => {
     mongoose.connection.db.dropDatabase(() => {
-      done();
+      mongoose.disconnect(() => {
+        server.close(done);
+      });
     });
   });
 

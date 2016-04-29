@@ -28,7 +28,7 @@ router.post('/signup', jsonParser, (req, res) => {
     user.generateToken((err, token) => {
       if (err) return res.status(500).json({ msg: 'could not create user' });
 
-      res.json({ token, msg: 'user created' });
+      res.json({ token, msg: 'user signup successful' });
     });
   });
 });
@@ -46,7 +46,7 @@ router.get('/signin', basicHttp, (req, res) => {
     user.generateToken((err, token) => {
       if (err) return res.status(500).json({ msg: 'could not create user' });
 
-      res.json({ token, msg: 'user created' });
+      res.json({ token, msg: 'user signin successful' });
     });
   });
 });
