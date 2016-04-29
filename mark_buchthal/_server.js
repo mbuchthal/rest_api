@@ -1,12 +1,10 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
 const heroRouter = require(__dirname + '/routes/herorouter');
 const villainRouter = require(__dirname + '/routes/villainrouter');
 const battleRouter = require(__dirname + '/routes/battlerouter');
 const authRouter = require(__dirname + '/routes/authrouter');
 const mongoose = require('mongoose');
-
 
 app.use('/api', authRouter);
 app.use('/api', heroRouter);
@@ -19,7 +17,7 @@ app.use((req, res) => {
 module.exports = exports = {
   server: { close: function() {
     throw new Error('server not started yet');
-  }},
+  } },
   listen: function(port, mongoString, cb) {
     mongoose.connect(mongoString);
     return this.server = app.listen(port, cb);
