@@ -49,3 +49,12 @@ make a GET request to:
 ```
 localhost:3000/api/battle
 ```
+
+### AUTHENTICATION
+
+Authentication was added so that users must be authenticated when using the POST, PUT, DELETE routes.
+As part of the response, the backend server will send a token.  If using these routes,
+```
+req.headers.token
+```
+must be set to the token sent by the server.
